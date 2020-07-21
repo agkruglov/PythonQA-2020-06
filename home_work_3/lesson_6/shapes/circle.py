@@ -14,7 +14,7 @@ class Circle(Shape):
         super().__init__()
 
         if r <= 0:
-            raise CircleNotValidException('Окружность с радиусом {} не может существовать'.format(r))
+            raise CircleNotValidException('{} с радиусом {} не может существовать'.format(Circle._name, r))
 
         self._r = r
 

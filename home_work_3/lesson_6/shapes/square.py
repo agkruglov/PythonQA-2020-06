@@ -12,7 +12,7 @@ class Square(Shape):
         super().__init__()
 
         if a <= 0:
-            raise SquareNotValidException('Квадрат со стороной {} не может существовать'.format(a))
+            raise SquareNotValidException('{} со стороной {} не может существовать'.format(Square._name, a))
 
         self._a = a
 

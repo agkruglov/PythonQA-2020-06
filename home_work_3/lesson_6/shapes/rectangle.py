@@ -12,7 +12,8 @@ class Rectangle(Square):
         super().__init__(a)
 
         if a <= 0 or b <= 0:
-            raise RectangleNotValidException('Прямоугольник со сторонами {} и {} не может существовать'.format(a, b))
+            raise RectangleNotValidException('{} со сторонами {} и {} не может существовать'.format(Rectangle._name,
+                                                                                                    a, b))
 
         self.__b = b
 
