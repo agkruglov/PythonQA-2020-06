@@ -3,11 +3,19 @@ from math import pi
 from shapes.shape import Shape
 
 
+class CircleNotValidException(Exception):
+    pass
+
+
 class Circle(Shape):
     _name = 'Окружность'
 
     def __init__(self, r):
         super().__init__()
+
+        if r <= 0:
+            raise CircleNotValidException('Окружность с радиусом {} не может существовать'.format(r))
+
         self._r = r
 
     @property

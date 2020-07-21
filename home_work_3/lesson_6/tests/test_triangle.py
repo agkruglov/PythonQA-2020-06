@@ -18,7 +18,7 @@ class TestTriangle:
 
     def test_name(self):
         triangle = Triangle(1, 1, 1)
-        assert triangle.name == 'Треугольник_2'
+        assert triangle.name == 'Треугольник_3'
 
     def test_area(self):
         assert self.triangle.area == sqrt(11 * 4 * 1 * 6)

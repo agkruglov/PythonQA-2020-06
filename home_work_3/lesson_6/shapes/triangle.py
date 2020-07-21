@@ -12,8 +12,10 @@ class Triangle(Shape):
 
     def __init__(self, a, b, c):
         super().__init__()
+
         if (a + b <= c) or (a + c <= b) or (b + c <= a):
-            raise TriangleNotValidException('Тругольник со сторонами {}, {} и {} не может существовать')
+            raise TriangleNotValidException('Треугольник со сторонами {}, {} и {} не может существовать')
+
         self.__a = a
         self.__b = b
         self.__c = c

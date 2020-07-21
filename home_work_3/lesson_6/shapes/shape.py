@@ -11,17 +11,11 @@ class Shape(ABC):
 
     def __init__(self):
         self.__class__.__instance_count += 1
-
-    def __del__(self):
-        self.__class__.__instance_count -= 1
-
-    @classmethod
-    def __name(cls):
-        return '{}_{}'.format(cls._name, cls.__instance_count)
+        self.__name = '{}_{}'.format(self.__class__._name, self.__class__.__instance_count)
 
     @property
     def name(self):
-        return self.__name()
+        return self.__name
 
     @property
     @abstractmethod
