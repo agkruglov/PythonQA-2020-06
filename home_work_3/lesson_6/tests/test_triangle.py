@@ -3,7 +3,7 @@ from math import sqrt
 import pytest
 
 from shapes.shape import NotShapeException
-from shapes.triangle import Triangle, TriangleNotValidException
+from shapes.triangle import Triangle
 
 
 class TestTriangle:
@@ -12,7 +12,7 @@ class TestTriangle:
         self.triangle = Triangle(7, 10, 5)
 
     def test_valid(self):
-        with pytest.raises(TriangleNotValidException):
+        with pytest.raises(ValueError):
             triangle = Triangle(1, 2, 3)
             assert triangle.angles == 3
 

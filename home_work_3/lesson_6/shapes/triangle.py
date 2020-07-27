@@ -3,19 +3,15 @@ from math import sqrt
 from shapes.shape import Shape
 
 
-class TriangleNotValidException(Exception):
-    pass
-
-
 class Triangle(Shape):
+    _instance_count = 0
     _name = 'Треугольник'
 
     def __init__(self, a, b, c):
         super().__init__()
 
         if (a + b <= c) or (a + c <= b) or (b + c <= a):
-            raise TriangleNotValidException('{} со сторонами {}, {} и {} не может существовать'.format(Triangle._name,
-                                                                                                       a, b, c))
+            raise ValueError('{} со сторонами {}, {} и {} не может существовать'.format(Triangle._name, a, b, c))
 
         self.__a = a
         self.__b = b

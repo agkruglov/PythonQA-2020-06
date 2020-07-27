@@ -1,10 +1,11 @@
 import pytest
 
-from shapes.shape import NotShapeException, Shape
+from shapes.shape import Shape
 from shapes.square import Square
 
 
 class TestSquare:
+    _instance_count = 0
 
     def setup_class(self):
         self.square = Square(5)

@@ -6,12 +6,12 @@ class NotShapeException(Exception):
 
 
 class Shape(ABC):
-    __instance_count = 0
+    _instance_count = 0
     _name = 'Фигура'
 
     def __init__(self):
-        self.__class__.__instance_count += 1
-        self.__name = '{}_{}'.format(self.__class__._name, self.__class__.__instance_count)
+        self.__class__._instance_count += 1
+        self.__name = '{}_{}'.format(self.__class__._name, self.__class__._instance_count)
 
     @property
     def name(self):

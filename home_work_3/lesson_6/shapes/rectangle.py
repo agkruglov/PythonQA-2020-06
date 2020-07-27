@@ -1,26 +1,27 @@
-from shapes.square import Square
+from shapes.shape import Shape
 
 
-class RectangleNotValidException(Exception):
-    pass
-
-
-class Rectangle(Square):
+class Rectangle(Shape):
+    _instance_count = 0
     _name = 'Прямоугольник'
 
     def __init__(self, a, b):
-        super().__init__(a)
+        super().__init__()
 
         if a <= 0 or b <= 0:
-            raise RectangleNotValidException('{} со сторонами {} и {} не может существовать'.format(Rectangle._name,
-                                                                                                    a, b))
+            raise ValueError('{} со сторонами {} и {} не может существовать'.format(Rectangle._name, a, b))
 
-        self.__b = b
+        self._a = a
+        self._b = b
 
     @property
     def area(self):
-        return self._a * self.__b
+        return self._a * self._b
+
+    @property
+    def angles(self):
+        return 4
 
     @property
     def perimeter(self):
-        return (self._a + self.__b) << 1
+        return (self._a + self._b) << 1

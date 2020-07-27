@@ -5,6 +5,7 @@ from shapes.shape import NotShapeException
 
 
 class TestRectangle:
+    _instance_count = 0
 
     def setup_class(self):
         self.rectangle = Rectangle(5, 4)

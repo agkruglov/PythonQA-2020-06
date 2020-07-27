@@ -5,8 +5,6 @@ import pytest
 from shapes.circle import Circle
 from shapes.shape import NotShapeException
 
-epsilon = 0.00000001
-
 
 class TestCircle:
 
