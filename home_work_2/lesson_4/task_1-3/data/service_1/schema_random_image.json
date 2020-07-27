@@ -9,7 +9,7 @@
             "pattern": ".*\\.jpg$"
         },
         "status": {
-            "type": "string"
+            "enum": ["success"]
         }
     }
 }

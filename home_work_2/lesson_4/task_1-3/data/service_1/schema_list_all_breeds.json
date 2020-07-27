@@ -19,7 +19,7 @@
             }
         },
         "status": {
-            "type": "string"
+            "enum": ["success"]
         }
     }
 }
