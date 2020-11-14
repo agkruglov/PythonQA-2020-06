@@ -1,47 +1,47 @@
-import json
-
-import jsonschema
 import pytest
-import requests
+
+from core.rest import get_obj_from_uri, check_json_schema
 
 
 class TestDogApi:
 
     def setup_class(self):
-        self.url = 'https://dog.ceo/api'
+        self.api_uri = 'https://dog.ceo/api'
 
     def test_list_all_breeds(self):
-        response = requests.get(self.url + '/breeds/list/all')
+        status, content = get_obj_from_uri(self.api_uri + '/breeds/list/all')
+        assert status == 200
 
-        assert response.status_code == 200
+        assert check_json_schema(content, 'data/service_1/schema_list_all_breeds.json')
 
-        with open('data/service_1/schema_list_all_breeds.json', 'r') as f:
-            schema = json.load(f)
-        jsonschema.validate(response.json(), schema)
+    @pytest.mark.parametrize(('img_num_uri', 'img_num'), [('0', 1), ('1', 1), ('3', 3), ('49', 49), ('50', 50),
+                                                          ('51', 50), ('test', 1)])
+    def test_random_image(self, img_num_uri, img_num):
+        status, content = get_obj_from_uri(self.api_uri + '/breeds/image/random' + '/' + img_num_uri)
+        assert status == 200
 
-    def test_random_image(self):
-        response = requests.get(self.url + '/breeds/image/random')
-
-        assert response.status_code == 200
-
-        content = response.json()
-
-        with open('data/service_1/schema_random_image.json', 'r') as f:
-            schema = json.load(f)
-        jsonschema.validate(content, schema)
+        assert check_json_schema(content, 'data/service_1/schema_random_image.json')
+        assert len(content['message']) == img_num
 
     def test_images_by_breed(self):
-        response = requests.get(self.url + '/breed/hound/images')
+        status, content = get_obj_from_uri(self.api_uri + '/breed/hound/images')
+        assert status == 200
 
-        assert response.status_code == 200
+        assert check_json_schema(content, 'data/service_1/schema_images_by_breed.json')
 
     def test_list_sub_breeds(self):
-        response = requests.get(self.url + '/breed/hound/list')
+        status, content = get_obj_from_uri(self.api_uri + '/breed/hound/list')
+        assert status == 200
 
-        assert response.status_code == 200
+    @pytest.mark.parametrize(('breed', 'status_code', 'message'),
+                             [('', 404, 'No route found for \"GET /api/breed//images/random\" with code: 0'),
+                              ('terrier', 200, ''),
+                              ('овчарка', 404, 'Breed not found (master breed does not exist)')])
+    def test_random_image_by_breed(self, breed, status_code, message):
+        status, content = get_obj_from_uri(self.api_uri + '/breed/{}/images/random'.format(breed))
+        assert status == status_code
 
-    @pytest.mark.parametrize(('breed', 'status_code'), [('', 404), ('terrier', 200), ('овчарка', 404)])
-    def test_random_image_by_breed(self, breed, status_code):
-        response = requests.get(self.url + '/breed/{}/images/random'.format(breed))
+        assert check_json_schema(content, 'data/service_1/schema_random_image_by_breed.json')
 
-        assert response.status_code == status_code
+        if status == 404:
+            assert content['message'] == message

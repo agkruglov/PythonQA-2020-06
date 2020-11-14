@@ -7,11 +7,7 @@
   ],
   "properties": {
     "message": {
-      "type": "array",
-      "additionalItems": true,
-      "items": {
-        "pattern": ".*\\.[Jj][Pp][Ee]*[Gg]$"
-      }
+      "pattern": ".*\\.jpg$"
     },
     "status": {
       "enum": [
