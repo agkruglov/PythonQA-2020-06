@@ -1,0 +1,18 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "message",
+    "status"
+  ],
+  "properties": {
+    "message": {
+      "pattern": ".*\\.jpg$"
+    },
+    "status": {
+      "enum": [
+        "success"
+      ]
+    }
+  }
+}

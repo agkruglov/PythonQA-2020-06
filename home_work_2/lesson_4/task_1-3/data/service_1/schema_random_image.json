@@ -1,0 +1,22 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "message",
+    "status"
+  ],
+  "properties": {
+    "message": {
+      "type": "array",
+      "additionalItems": true,
+      "items": {
+        "pattern": ".*\\.[Jj][Pp][Ee]*[Gg]$"
+      }
+    },
+    "status": {
+      "enum": [
+        "success"
+      ]
+    }
+  }
+}
