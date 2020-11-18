@@ -1,0 +1,19 @@
+{
+    "type": "object",
+    "additionalProperties": true,
+    "required": [
+        "message",
+        "status"
+    ],
+    "properties": {
+        "message": {
+            "type": "string"
+        },
+        "status": {
+            "type": "string"
+        },
+        "code": {
+            "type": "number"
+        }
+    }
+}
